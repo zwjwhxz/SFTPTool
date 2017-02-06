@@ -1,5 +1,5 @@
-#ifndef FTPWINDOW_H
-#define FTPWINDOW_H
+#ifndef SFTPWINDOW_H
+#define SFTPWINDOW_H
 
 #include <QHash>
 #include <QMessageBox>
@@ -10,6 +10,7 @@
 class SftpConnector;
 class SftpFileManager;
 class SftpBackupDialog;
+class SftpUploadPath;
 
 typedef QHash<QString, SftpConnector*> SftpList;
 
@@ -20,6 +21,7 @@ class SftpWindow : public QObject
     friend class SftpFileManager;
     friend class SftpSession;
     friend class SftpBackupDialog;
+    friend class SftpUploadPath;
 
 public:
     SftpWindow(Ui::MainWindow* pWindow);
@@ -94,8 +96,10 @@ private:
 
     SftpBackupDialog* m_backup_dialog;
 
+    SftpUploadPath* m_upload_path;
+
     QMessageBox m_console;
 
 };
 
-#endif // FTPWINDOW_H
+#endif // SFTPWINDOW_H

@@ -46,6 +46,8 @@ public:
 
     int upload_file(QString& file_name, QString& absolute_path);
 
+    int upload_path(QString& local_path, QString& remote_path);
+
     void set_server_name(QString& server_name);
 
     void run_upload();

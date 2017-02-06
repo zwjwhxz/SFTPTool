@@ -4,6 +4,7 @@
 #include <QDir>
 #include <QString>
 #include <QVector>
+#include "sftpwindow.h"
 
 typedef struct file_handle
 {
@@ -22,23 +23,31 @@ public:
 
     ~SftpFileTree();
 
-    int get_subfile(QString file_path);
+    int init_subfile(QString file_path);
+
+    void set_game_index(int game_index){m_game_index = game_index;};
+
+    QVector<FILE_HANDLE*> get_all_file(){return m_all_file;};
 
 private:
     void add_file(QString file_path, bool is_file);
 
+    int make_remote_path(FILE_HANDLE* handle);
+
 private:
+    int m_game_index;
+
     QVector<FILE_HANDLE*> m_all_file;
 };
 
 class SftpUploadPath
 {
 public:
-    SftpUploadPath();
+    SftpUploadPath(SftpWindow* sfpt_window);
 
     ~SftpUploadPath();
 
-    int upload_path_file(QString file_path);
+    int upload_path_file(QString file_path, int game_index);
 
 private:
     int load_all_file(QString file_path);
@@ -47,6 +56,8 @@ private:
 
 private:
     SftpFileTree file_tree_handle;
+
+    QHash<int, SftpList*> m_connector_list;
 };
 
 #endif // SFTPUPLOADPATH_H

@@ -441,6 +441,80 @@ int SftpSession::upload_file(QString& file_name, QString& absolute_path)
     return 0;
 }
 
+int SftpSession::upload_path(QString& local_path, QString& remote_path)
+{
+    if (!m_sftp_session)
+    {
+        m_sftp_session = libssh2_sftp_init(m_libssh2_session);
+    }
+
+    if (!m_sftp_session || local_path.isEmpty() || remote_path.isEmpty())
+    {
+        m_sftp_window->display_error_code(1);
+        return -1;
+    }
+
+    if (isRunning())
+    {
+        return -1;
+    }
+
+    FILE* tempstorage = NULL;
+    tempstorage = fopen(local_path.toLatin1().data(), "rb");
+
+    if (!tempstorage)
+    {
+        m_console.setIcon(QMessageBox::Warning);
+        m_console.setText("open file failure!");
+        m_console.show();
+        fclose(tempstorage);
+        exit_upload();
+        return -1;
+    }
+
+    //path file
+    QString file_path = remote_path + ".sftptemp";
+    LIBSSH2_SFTP_HANDLE* sftp_file_handle = libssh2_sftp_open(m_sftp_session, file_path.toLatin1().data(),
+                          LIBSSH2_FXF_WRITE|LIBSSH2_FXF_CREAT|LIBSSH2_FXF_TRUNC,
+                          LIBSSH2_SFTP_S_IRUSR|LIBSSH2_SFTP_S_IWUSR|
+                          LIBSSH2_SFTP_S_IRGRP|LIBSSH2_SFTP_S_IROTH);
+
+    if (!sftp_file_handle)
+    {
+        m_console.setIcon(QMessageBox::Warning);
+        m_console.setText("upload file failure!");
+        m_console.show();
+        fclose(tempstorage);
+        exit_upload();
+        return -1;
+    }
+
+    fseek(tempstorage, 0L, SEEK_END);
+    int filesize = ftell(tempstorage);
+    fseek(tempstorage, 0L, SEEK_SET);
+
+    QString item_name = m_server_name + ":";
+    m_upload_dialog.add_progress_item(item_name);
+    m_upload_dialog.set_max_value(item_name, filesize);
+
+    m_sftp_upload_handles.insert(item_name, sftp_file_handle);
+    m_upload_files.insert(item_name, tempstorage);
+
+    m_upload_file_path.insert(item_name, local_path);
+
+    //log
+    time_t sec_time = time(NULL);
+    tm* t= localtime(&sec_time);
+
+    FILE* log = fopen("./uploadlog.txt", "a");
+    fprintf(log, "[%d-%02d-%02d][%02d:%02d:%02d]:",t->tm_year + 1900, t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
+    QString strlog = "upload [" + m_server_name + "]" + "[" + local_path + "]" + "    >>    " + remote_path + "\n";
+    fputs(strlog.toLatin1().data(), log);
+    fclose(log);
+
+    return 0;
+}
+
 void SftpSession::exit_download()
 {
     fclose(m_tempstorage);
