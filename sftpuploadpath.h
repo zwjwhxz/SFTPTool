@@ -27,6 +27,8 @@ public:
 
     void set_game_index(int game_index){m_game_index = game_index;};
 
+    int get_game_index(){return m_game_index;};
+
     QVector<FILE_HANDLE*> get_all_file(){return m_all_file;};
 
 private:
@@ -56,6 +58,8 @@ private:
 
 private:
     SftpFileTree file_tree_handle;
+
+    SftpWindow* m_sftp_window;
 
     QHash<int, SftpList*> m_connector_list;
 };

@@ -131,6 +131,11 @@ int SftpConnector::upload_file(QString& file_name, QString absolute_path)
     return m_sftp_session->upload_file(file_name, absolute_path);
 }
 
+int SftpConnector::upload_path(QString& local_path, QString remote_path)
+{
+    return m_sftp_session->upload_path(local_path, remote_path);
+}
+
 void SftpConnector::run_upload()
 {
     m_sftp_session->run_upload();

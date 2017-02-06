@@ -27,6 +27,8 @@ public:
 
     int upload_file(QString& file_name, QString absolute_path = NULL);
 
+    int upload_path(QString& local_path, QString remote_path);
+
     void flush_remote_directory();
 
     void run_upload();
