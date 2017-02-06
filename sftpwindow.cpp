@@ -4,6 +4,7 @@
 #include "sftpfilemanager.h"
 #include "sftpbackupdialog.h"
 #include "ShellAPI.h"
+#include "sftpuploadpath.h"
 #include <QFileDialog>
 
 SftpWindow::SftpWindow(Ui::MainWindow* pWindow)
@@ -56,6 +57,7 @@ void SftpWindow::init_singnals()
     QObject::connect(m_ui_context->TREE_DUMMY_SERVER, SIGNAL(itemPressed(QTreeWidgetItem*, int)), this, SLOT(flush_file()));
     QObject::connect(m_ui_context->TREE_KUNKA_SERVER, SIGNAL(itemPressed(QTreeWidgetItem*, int)), this, SLOT(flush_file()));
     QObject::connect(m_ui_context->BTN_UPLOAD_LOG, SIGNAL(pressed()), this, SLOT(open_upload_log()));
+    QObject::connect(m_ui_context->BTN_UPLOADPATH, SIGNAL(pressed()), this, SLOT(upload_file_path()));
 }
 
 void SftpWindow::del_singnals()
@@ -76,6 +78,7 @@ void SftpWindow::del_singnals()
     QObject::disconnect(m_ui_context->TREE_DUMMY_SERVER, SIGNAL(itemPressed(QTreeWidgetItem*, int)), this, SLOT(flush_file()));
     QObject::disconnect(m_ui_context->TREE_KUNKA_SERVER, SIGNAL(itemPressed(QTreeWidgetItem*, int)), this, SLOT(flush_file()));
     QObject::disconnect(m_ui_context->BTN_UPLOAD_LOG, SIGNAL(pressed()), this, SLOT(open_upload_log()));
+    QObject::connect(m_ui_context->BTN_UPLOADPATH, SIGNAL(pressed()), this, SLOT(upload_file_path()));
 }
 
 void SftpWindow::init_window()
@@ -707,4 +710,11 @@ void SftpWindow::backup_file()
 void SftpWindow::open_upload_log()
 {
     ShellExecuteW(NULL,QString("open").toStdWString().c_str(),QString("uploadlog.txt").toStdWString().c_str(),NULL,NULL,SW_SHOW);
+}
+
+void SftpWindow::upload_file_path()
+{
+    QString file_path = m_ui_context->EDIT_LOCAL_PATH->text();
+    SftpUploadPath upload_path;
+    upload_path.upload_path_file(file_path);
 }

@@ -78,6 +78,8 @@ private slots:
 
     void open_upload_log();
 
+    void upload_file_path();
+
 public slots:
     void connect_sftp_server();
 
