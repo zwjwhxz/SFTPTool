@@ -115,12 +115,12 @@ int SftpUploadPath::upload_all_file()
     QVector<FILE_HANDLE*>::iterator it = file_handles.begin();
 
     int game_index = file_tree_handle.get_game_index();
+    QSet<SftpConnector*> sftp_session;
     for ( ; it != file_handles.end(); ++it)
     {
         FILE_HANDLE* handle = *it;
         if (handle->is_file)
         {
-            QSet<SftpConnector*> sftp_session;
             if (0 == game_index)
             {
                 QTreeWidgetItemIterator item_it(m_sftp_window->m_ui_context->TREE_99_SERVER);
@@ -172,12 +172,11 @@ int SftpUploadPath::upload_all_file()
                     ++item_it;
                 }
             }
-
-            QSet<SftpConnector*>::iterator session_it = sftp_session.begin();
-            for (; session_it != sftp_session.end(); ++session_it)
-            {
-                (*session_it)->run_upload();
-            }
         }
+    }
+    QSet<SftpConnector*>::iterator session_it = sftp_session.begin();
+    for (; session_it != sftp_session.end(); ++session_it)
+    {
+        (*session_it)->run_upload();
     }
 }

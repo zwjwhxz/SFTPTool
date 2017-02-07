@@ -456,6 +456,7 @@ int SftpSession::upload_path(QString& local_path, QString& remote_path)
 
     if (isRunning())
     {
+        m_sftp_window->display_error_code(3);
         return -1;
     }
 
@@ -493,7 +494,7 @@ int SftpSession::upload_path(QString& local_path, QString& remote_path)
     int filesize = ftell(tempstorage);
     fseek(tempstorage, 0L, SEEK_SET);
 
-    QString item_name = m_server_name + ":";
+    QString item_name = m_server_name + ":" + local_path;
     m_upload_dialog.add_progress_item(item_name);
     m_upload_dialog.set_max_value(item_name, filesize);
 
@@ -542,8 +543,8 @@ void SftpSession::exit_upload()
     QHash<QString, LIBSSH2_SFTP_HANDLE*>::iterator it = m_sftp_upload_handles.begin();
     for (; it != m_sftp_upload_handles.end(); ++it)
     {
-       libssh2_sftp_unlink(m_sftp_session, (m_upload_file_path.value(it.key())).toLatin1().data());
-       libssh2_sftp_rename(m_sftp_session, (m_upload_file_path.value(it.key()) + ".sftptemp").toLatin1().data(),
+        libssh2_sftp_unlink(m_sftp_session, (m_upload_file_path.value(it.key())).toLatin1().data());
+        libssh2_sftp_rename(m_sftp_session, (m_upload_file_path.value(it.key()) + ".sftptemp").toLatin1().data(),
                               (m_upload_file_path.value(it.key())).toLatin1().data());
     }
 

@@ -630,6 +630,11 @@ void SftpWindow::display_error_code(int error)
         m_console.setText("Auth failure!");
         m_console.show();
     }
+    else if (3 == error)
+    {
+        m_console.setText("upload file error,interrupt!");
+        m_console.show();
+    }
 }
 
 QString SftpWindow::get_local_file_path()
