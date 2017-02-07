@@ -500,7 +500,7 @@ int SftpSession::upload_path(QString& local_path, QString& remote_path)
     m_sftp_upload_handles.insert(item_name, sftp_file_handle);
     m_upload_files.insert(item_name, tempstorage);
 
-    m_upload_file_path.insert(item_name, local_path);
+    m_upload_file_path.insert(item_name, remote_path);
 
     //log
     time_t sec_time = time(NULL);

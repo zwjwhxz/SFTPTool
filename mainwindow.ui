@@ -177,7 +177,7 @@
              <item row="8" column="4">
               <widget class="QPushButton" name="BTN_UPLOADPATH">
                <property name="text">
-                <string>指定上传</string>
+                <string>路径上传</string>
                </property>
               </widget>
              </item>
@@ -278,7 +278,7 @@
          <item>
           <widget class="QPushButton" name="BTN_UPLOAD">
            <property name="text">
-            <string>一键上传</string>
+            <string>文件上传</string>
            </property>
           </widget>
          </item>
