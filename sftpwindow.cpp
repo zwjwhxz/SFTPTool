@@ -20,8 +20,6 @@ SftpWindow::SftpWindow(Ui::MainWindow* pWindow)
 
     m_backup_dialog = new SftpBackupDialog(this);
 
-    m_upload_path = new SftpUploadPath(this);
-
     init_singnals();
     init_window();
     init_local_file();
@@ -37,8 +35,6 @@ SftpWindow::~SftpWindow()
     }
 
     delete m_backup_dialog;
-
-    delete m_upload_path;
 
     del_singnals();
 }
@@ -724,8 +720,13 @@ void SftpWindow::open_upload_log()
 void SftpWindow::upload_file_path()
 {
     QString file_path = m_ui_context->EDIT_LOCAL_PATH->text();
+    SftpUploadPath* upload_path = new SftpUploadPath(this);
     if (!file_path.isEmpty())
     {
-        m_upload_path->upload_path_file(file_path, m_ui_context->COMBOX_GAME->currentIndex());
+        if (!(upload_path->upload_path_file(file_path, m_ui_context->COMBOX_GAME->currentIndex())))
+        {
+            display_error_code(3);
+        }
     }
+    delete upload_path;
 }

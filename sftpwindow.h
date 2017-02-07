@@ -96,8 +96,6 @@ private:
 
     SftpBackupDialog* m_backup_dialog;
 
-    SftpUploadPath* m_upload_path;
-
     QMessageBox m_console;
 
 };

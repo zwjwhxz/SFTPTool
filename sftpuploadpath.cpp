@@ -23,7 +23,10 @@ int SftpFileTree::init_subfile(QString file_path)
     //文件路径直接添加返回
     if (fi.isFile())
     {
-        add_file(file_path, true);
+        if (!add_file(file_path, true))
+        {
+            return 0;
+        }
         return 1;
     }
     //既不是文件也不是目录返回错误
@@ -38,7 +41,10 @@ int SftpFileTree::init_subfile(QString file_path)
     //空文件夹
     if (0 == list.size())
     {
-        add_file(file_path, false);
+        if (!add_file(file_path, false))
+        {
+            return 0;
+        }
         return 1;
     }
 
@@ -47,25 +53,35 @@ int SftpFileTree::init_subfile(QString file_path)
     {
         if (it->isDir())
         {
-            init_subfile(it->filePath());
-            add_file(it->filePath(), false);
+            if (!init_subfile(it->filePath()))
+            {
+                 return 0;
+            }
+            if (!add_file(it->filePath(), false))
+            {
+                return 0;
+            }
             continue;
         }
-        add_file(it->filePath(), true);
+        if (!add_file(it->filePath(), true))
+        {
+            return 0;
+        }
     }
     return 1;
 }
 
-void SftpFileTree::add_file(QString file_path, bool is_file)
+int SftpFileTree::add_file(QString file_path, bool is_file)
 {
     FILE_HANDLE* handle = new FILE_HANDLE;
     handle->is_file = is_file;
     handle->local_path = file_path;
     if (!make_remote_path(handle))
     {
-        return;
+        return 0;
     }
     m_all_file.push_back(handle);
+    return 1;
 }
 
 int SftpFileTree::make_remote_path(FILE_HANDLE* handle)
@@ -100,13 +116,19 @@ SftpUploadPath::~SftpUploadPath()
 int SftpUploadPath::upload_path_file(QString file_path, int game_index)
 {
     file_tree_handle.set_game_index(game_index);
-    load_all_file(file_path);
+    if (!load_all_file(file_path))
+    {
+        return 0;
+    }
     upload_all_file();
 }
 
 int SftpUploadPath::load_all_file(QString file_path)
 {
-    file_tree_handle.init_subfile(file_path);
+    if (!file_tree_handle.init_subfile(file_path))
+    {
+        return 0;
+    }
 }
 
 int SftpUploadPath::upload_all_file()

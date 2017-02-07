@@ -32,7 +32,7 @@ public:
     QVector<FILE_HANDLE*> get_all_file(){return m_all_file;};
 
 private:
-    void add_file(QString file_path, bool is_file);
+    int add_file(QString file_path, bool is_file);
 
     int make_remote_path(FILE_HANDLE* handle);
 
