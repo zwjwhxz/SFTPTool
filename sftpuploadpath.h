@@ -49,9 +49,8 @@ public:
 
     ~SftpUploadPath();
 
-    int upload_path_file(QString file_path, int game_index);
+    int load_path_file(QString file_path, int game_index);
 
-private:
     int load_all_file(QString file_path);
 
     int upload_all_file();

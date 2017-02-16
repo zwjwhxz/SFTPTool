@@ -113,14 +113,13 @@ SftpUploadPath::~SftpUploadPath()
 
 }
 
-int SftpUploadPath::upload_path_file(QString file_path, int game_index)
+int SftpUploadPath::load_path_file(QString file_path, int game_index)
 {
     file_tree_handle.set_game_index(game_index);
     if (!load_all_file(file_path))
     {
         return 0;
     }
-    upload_all_file();
 }
 
 int SftpUploadPath::load_all_file(QString file_path)

@@ -719,14 +719,19 @@ void SftpWindow::open_upload_log()
 
 void SftpWindow::upload_file_path()
 {
-    QString file_path = m_ui_context->EDIT_LOCAL_PATH->text();
     SftpUploadPath* upload_path = new SftpUploadPath(this);
-    if (!file_path.isEmpty())
+    QString file_path = m_ui_context->EDIT_PATH_UPLOAD->toPlainText();
+    QStringList spilt_path = file_path.split("\n");
+    for (int i = 0; i < spilt_path.size(); ++i)
     {
-        if (!(upload_path->upload_path_file(file_path, m_ui_context->COMBOX_GAME->currentIndex())))
+        if (!spilt_path.at(i).isEmpty())
         {
-            display_error_code(3);
+            if (!(upload_path->load_path_file(spilt_path.at(i), m_ui_context->COMBOX_GAME->currentIndex())))
+            {
+                display_error_code(3);
+            }
         }
     }
+    upload_path->upload_all_file();
     delete upload_path;
 }

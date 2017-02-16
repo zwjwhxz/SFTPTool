@@ -60,26 +60,6 @@
           <string>GroupBox</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="2" column="0">
-           <widget class="QTreeWidget" name="TREE_LOCAL">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <column>
-             <property name="text">
-              <string>文件名</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>修改时间</string>
-             </property>
-            </column>
-           </widget>
-          </item>
           <item row="0" column="0">
            <widget class="QFrame" name="frame_3">
             <property name="sizePolicy">
@@ -174,13 +154,6 @@
                </property>
               </widget>
              </item>
-             <item row="8" column="4">
-              <widget class="QPushButton" name="BTN_UPLOADPATH">
-               <property name="text">
-                <string>路径上传</string>
-               </property>
-              </widget>
-             </item>
              <item row="7" column="2">
               <widget class="QLineEdit" name="EDIT_LOCAL_PATH"/>
              </item>
@@ -202,6 +175,43 @@
              </item>
             </layout>
            </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QPushButton" name="BTN_UPLOADPATH">
+            <property name="text">
+             <string>路径上传</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QTreeWidget" name="TREE_LOCAL">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <column>
+             <property name="text">
+              <string>文件名</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>修改时间</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QPushButton" name="BTN_UPLOAD">
+            <property name="text">
+             <string>文件上传</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QTextEdit" name="EDIT_PATH_UPLOAD"/>
           </item>
          </layout>
         </widget>
@@ -272,13 +282,6 @@
           <widget class="QPushButton" name="BTN_FLUSH_FILE">
            <property name="text">
             <string>刷新文件</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="BTN_UPLOAD">
-           <property name="text">
-            <string>文件上传</string>
            </property>
           </widget>
          </item>
