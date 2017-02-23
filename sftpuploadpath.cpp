@@ -19,6 +19,8 @@ SftpFileTree::~SftpFileTree()
 
 int SftpFileTree::init_subfile(QString file_path)
 {
+    QString local_path_base = SftpConfigManager::instance()->get_local_file_path(m_game_index);
+    file_path = local_path_base + file_path;
     QFileInfo fi(file_path);
     //文件路径直接添加返回
     if (fi.isFile())

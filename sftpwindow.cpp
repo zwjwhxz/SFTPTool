@@ -398,7 +398,7 @@ void SftpWindow::upload_file()
     }
 }
 
-void SftpWindow::connect_sftp_server()
+void SftpWindow::connect_sftp_server(QString remarks)
 {
     QString server = m_ui_context->EDIT_SERVER->text();
     QString user = m_ui_context->EDIT_USER->text();
@@ -432,7 +432,8 @@ void SftpWindow::connect_sftp_server()
     QPixmap pix_server(":/images/server.png");
     server_item->setText(0, server);
     server_item->setIcon(0, pix_server);
-    server_item->setCheckState (1, Qt::Checked);
+    server_item->setCheckState(1, Qt::Checked);
+    server_item->setText(2, remarks);
 
     if (0 == current_game)
     {
@@ -488,7 +489,7 @@ void SftpWindow::reconnect_sftp_server()
             m_ui_context->COMBOX_GAME->setCurrentIndex(2);
         }
 
-        connect_sftp_server();
+        connect_sftp_server((*it).remarks);
     }
 }
 
@@ -606,7 +607,7 @@ QTreeWidget* SftpWindow::get_current_remote_server_tree()
     return NULL;
 }
 
-void SftpWindow::display_error_code(int error)
+void SftpWindow::display_error_code(int error, QString info)
 {
     if (0 == error)
     {
@@ -628,7 +629,7 @@ void SftpWindow::display_error_code(int error)
     }
     else if (3 == error)
     {
-        m_console.setText("upload file error,interrupt!");
+        m_console.setText("upload " + info + " error,interrupt!");
         m_console.show();
     }
 }
@@ -728,7 +729,7 @@ void SftpWindow::upload_file_path()
         {
             if (!(upload_path->load_path_file(spilt_path.at(i), m_ui_context->COMBOX_GAME->currentIndex())))
             {
-                display_error_code(3);
+                display_error_code(3, spilt_path.at(i));
             }
         }
     }

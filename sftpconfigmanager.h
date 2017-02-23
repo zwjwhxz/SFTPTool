@@ -10,6 +10,7 @@ typedef struct server_info
 {
     int game;
     QString host;
+    QString remarks;
     QString user;
     QString password;
 }SERVER_CFG;

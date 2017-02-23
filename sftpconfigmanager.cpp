@@ -95,12 +95,14 @@ void SftpConfigManager::load_server_config()
     for (unsigned int i = 0; i < game_id.size(); ++i)
     {
         std::string host = game_id[i]["host"].asString();
+        std::string remarks = game_id[i]["remarks"].asString();
         std::string user = game_id[i]["user"].asString();
         std::string password = game_id[i]["password"].asString();
 
         SERVER_CFG info;
         info.game = 0;
         info.host.append(host.c_str());
+        info.remarks.append(remarks.c_str());
         info.user.append(user.c_str());
         info.password.append(password.c_str());
         m_server_config.push_back(info);
@@ -111,12 +113,14 @@ void SftpConfigManager::load_server_config()
     for (unsigned int i = 0; i < game_id.size(); ++i)
     {
         std::string host = game_id[i]["host"].asString();
+        std::string remarks = game_id[i]["remarks"].asString();
         std::string user = game_id[i]["user"].asString();
         std::string password = game_id[i]["password"].asString();
 
         SERVER_CFG info;
         info.game = 1;
         info.host.append(host.c_str());
+        info.remarks.append(remarks.c_str());
         info.user.append(user.c_str());
         info.password.append(password.c_str());
         m_server_config.push_back(info);
@@ -127,12 +131,14 @@ void SftpConfigManager::load_server_config()
     for (unsigned int i = 0; i < game_id.size(); ++i)
     {
         std::string host = game_id[i]["host"].asString();
+        std::string remarks = game_id[i]["remarks"].asString();
         std::string user = game_id[i]["user"].asString();
         std::string password = game_id[i]["password"].asString();
 
         SERVER_CFG info;
         info.game = 2;
         info.host.append(host.c_str());
+        info.remarks.append(remarks.c_str());
         info.user.append(user.c_str());
         info.password.append(password.c_str());
         m_server_config.push_back(info);

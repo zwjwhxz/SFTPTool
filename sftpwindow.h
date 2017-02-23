@@ -28,7 +28,7 @@ public:
 
     ~SftpWindow();
 
-    void display_error_code(int error);
+    void display_error_code(int error, QString info = "");
 
     QTreeWidget* get_current_remote_file_tree();
 
@@ -83,7 +83,7 @@ private slots:
     void upload_file_path();
 
 public slots:
-    void connect_sftp_server();
+    void connect_sftp_server(QString remarks = "");
 
     void flush_file();
 

@@ -63,7 +63,7 @@ void MainWindow::init_config()
             ui->COMBOX_GAME->setCurrentIndex(2);
         }
 
-        m_ftp_window->connect_sftp_server();
+        m_ftp_window->connect_sftp_server((*it).remarks);
     }
 }
 

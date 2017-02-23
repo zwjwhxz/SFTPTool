@@ -176,6 +176,7 @@ void SftpSession::read_sftp_file_list(QString path)
 
         file_item->setText(2, info_list.at(0));
         file_item->setText(3, info_list.at(5));
+        file_item->setText(4, QString::number(attrs.filesize));//???
 
         m_sftp_window->add_file_tree_item(m_sftp_window->get_current_remote_file_tree(), file_item);
     }
@@ -559,6 +560,7 @@ void SftpSession::exit_upload()
     m_sftp_upload_handles.clear();
 
     m_sftp_window->m_ui_context->centralWidget->setEnabled(true);
+    m_sftp_window->flush_file();
 }
 
 void SftpSession::run_upload()

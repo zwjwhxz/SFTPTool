@@ -369,6 +369,11 @@
               <string>上传选项</string>
              </property>
             </column>
+            <column>
+             <property name="text">
+              <string>备注</string>
+             </property>
+            </column>
            </widget>
           </item>
           <item row="1" column="0">
@@ -398,6 +403,11 @@
             <column>
              <property name="text">
               <string>所属用户</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>文件大小</string>
              </property>
             </column>
            </widget>
@@ -457,6 +467,11 @@
               <string>所属用户</string>
              </property>
             </column>
+            <column>
+             <property name="text">
+              <string>文件大小</string>
+             </property>
+            </column>
            </widget>
           </item>
           <item row="2" column="0">
@@ -488,6 +503,11 @@
             <column>
              <property name="text">
               <string>上传选项</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>备注</string>
              </property>
             </column>
            </widget>
@@ -549,6 +569,11 @@
               <string>上传选项</string>
              </property>
             </column>
+            <column>
+             <property name="text">
+              <string>备注</string>
+             </property>
+            </column>
            </widget>
           </item>
           <item row="3" column="0">
@@ -571,6 +596,11 @@
             <column>
              <property name="text">
               <string>所属用户</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>文件大小</string>
              </property>
             </column>
            </widget>
