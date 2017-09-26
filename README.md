@@ -12,16 +12,16 @@ Qt-4.8 + MinGW-3.8 + libssh2-1.5.0 upload file in multi sftp server.
     "kunka": 
     [
         {
-            "host": "54.169.73.104",
+            "host": "***********",
             "remarks":"服务器2",
-            "user": "remi",
-            "password": "topremi"
+            "user": "********",
+            "password": "**********"
         },
         {
-            "host": "54.169.140.152",
+            "host": "**********",
             "remarks":"服务器3",
-            "user": "kunka",
-            "password": "topfunkunka"
+            "user": "***********",
+            "password": "**********"
         }
     ]
 
